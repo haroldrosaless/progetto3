@@ -1,0 +1,48 @@
+import java.io.*;
+
+import java.net.Socket;
+
+public class numclient {
+
+    public static void main( String[] args)
+    {
+        try{
+
+            Socket s = new Socket("localhost", 3000);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            DataOutputStream out = new DataOutputStream(s.getOutputStream());
+            while(true){
+
+            System.out.print("insrisci numero:");
+            int indovino = scanner.nextInt();
+            out.writeBytes(indovino);
+
+            String risposta =(String) in.readLine();
+            System.out.println(risposta);
+                        
+            if (risposta.contains("1")) {
+                 System.out.print("troppo piccolo");
+            }else if(risposta.contains("2")){
+                 System.out.print("troppo grande);
+            } 
+            else if(risposta.contains("congratulazioni")){
+            break;
+}
+
+            s.close();
+
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("something went wrong,closing client...");
+            System.exit(1);
+
+
+
+        }
+
+
+    }
+    
+}
